@@ -36,17 +36,17 @@ express()
 
   // this line gives me the html at this address
 
-  // eventually we'll have separate servers for html and for backend stuff (database, 
+  // eventually we'll have separate servers for html and for backend stuff (database,
   // data you input, etc)
 
   .get("/monkey-message", (req, res) => {
     const messages = [
-      'Don’t monkey around with me.',
-      'If you pay peanuts, you get monkeys.',
-      'I fling 💩 at you!',
-      '🙊',
-      '🙈',
-      '🙉',
+      "Don’t monkey around with me.",
+      "If you pay peanuts, you get monkeys.",
+      "I fling 💩 at you!",
+      "🙊",
+      "🙈",
+      "🙉",
     ];
     let randomNumber = Math.floor(Math.random() * 6);
     const message = { author: "monkey", text: messages[randomNumber] };
@@ -54,11 +54,14 @@ express()
     setTimeout(() => {
       res.status(200).json({ status: 200, message });
     }, randomTime);
-    
   })
 
   .get("/parrot-message", (req, res) => {
-    const message = { author: "cat", text: "Polly want a cracker?" };
+    // {test: "this is the message"}
+    // console.log(req);
+    // console.log(req.query.test);
+    console.log(req.query);
+    const message = { author: "cat", text: req.query.message }; // returns : [object Object]
     const randomTime = Math.floor(Math.random() * 3000);
     setTimeout(() => {
       res.status(200).json({ status: 200, message });
