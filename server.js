@@ -26,6 +26,45 @@ express()
       res.status(200).json({ status: 200, message });
     }, randomTime);
   })
+  // http://localhost:8000/monkey-message/
+
+  // http://localhost:8000/monkey-message
+
+  // these last two lines fetch me monkey message
+
+  // http://localhost:8000/monkey
+
+  // this line gives me the html at this address
+
+  // eventually we'll have separate servers for html and for backend stuff (database, 
+  // data you input, etc)
+
+  .get("/monkey-message", (req, res) => {
+    const messages = [
+      'Don’t monkey around with me.',
+      'If you pay peanuts, you get monkeys.',
+      'I fling 💩 at you!',
+      '🙊',
+      '🙈',
+      '🙉',
+    ];
+    let randomNumber = Math.floor(Math.random() * 6);
+    const message = { author: "monkey", text: messages[randomNumber] };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({ status: 200, message });
+    }, randomTime);
+    
+  })
+
+  .get("/parrot-message", (req, res) => {
+    const message = { author: "cat", text: "Polly want a cracker?" };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({ status: 200, message });
+    }, randomTime);
+  })
+
   // add new endpoints here ☝️
   // ---------------------------------
   // Nothing to modify below this line
