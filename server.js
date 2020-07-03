@@ -61,7 +61,42 @@ express()
     // console.log(req);
     // console.log(req.query.test);
     console.log(req.query);
-    const message = { author: "cat", text: req.query.message }; // returns : [object Object]
+    const message = { author: "parrot", text: req.query.message };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({ status: 200, message });
+    }, randomTime);
+  })
+
+  .get("/bot-message", (req, res) => {
+    const getBotMessage = (text) => {
+      const commonGreetings = ["hi", "hello", "howdy"];
+      let botMsg = text;
+      let userText = text.toLowerCase();
+      
+      commonGreetings.forEach((greeting) => {
+        if (userText.includes(greeting)) {
+          botMsg = "Hello!";
+        }
+      })
+
+      const commonGoodbyes = ['bye', 'you suck', 'salut'];
+      commonGoodbyes.forEach((salutation) => {
+        if (userText.includes(salutation)) {
+          botMsg = "Goodbye!";
+        }
+      })
+  
+      return botMsg;
+    };
+    
+
+    // console.log(req.query);
+    const message = {
+      author: "bot",
+      text: `Bzzt ${getBotMessage(req.query.message)}`,
+      // text: `Bzzt ${req.query.message}`,
+    };
     const randomTime = Math.floor(Math.random() * 3000);
     setTimeout(() => {
       res.status(200).json({ status: 200, message });

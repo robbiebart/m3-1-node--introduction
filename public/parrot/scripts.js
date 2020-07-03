@@ -35,6 +35,22 @@ const sendMessage = (event) => {
 
   updateConversation(message);
 };
+
+const sendMessage = (event) => {
+  event.preventDefault();
+
+  const message = { author: "user", text: messageInput.value };
+
+  fetch(`/parrot-message?message=${messageInput.value}`)
+    // { message: ${messageInput.value} } the syntax requires the key followed by =
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      updateConversation(data.message);
+    });
+
+  updateConversation(message);
+};
 // the type that deals with databases you use fetches like this
 //query most basic way of sending data to back end;
 // query is grabbing what comes after the q marks and makes an object ouf of it, test
